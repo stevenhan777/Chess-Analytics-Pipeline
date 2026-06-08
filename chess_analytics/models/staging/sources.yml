@@ -1,0 +1,30 @@
+# models/staging/sources.yml
+version: 2
+
+sources:
+  - name: lichess_raw
+    database: chess-497919
+    schema: lichess_raw
+    tables:
+
+      - name: games
+        description: "One row per Lichess game. Scalar metadata only."
+        columns:
+          - name: game_id
+            tests: [unique, not_null]
+
+      - name: moves
+        description: "One row per ply. Move SAN and player identity."
+        columns:
+          - name: game_id
+            tests: [not_null]
+          - name: move_offset
+            tests: [not_null]
+
+      - name: move_evals
+        description: "One row per ply. Engine eval and clock data."
+        columns:
+          - name: game_id
+            tests: [not_null]
+          - name: move_offset
+            tests: [not_null]
