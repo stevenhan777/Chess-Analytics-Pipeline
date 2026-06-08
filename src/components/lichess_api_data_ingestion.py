@@ -298,12 +298,16 @@ class DataIngestion:
             if line.strip()
         ]
 
+# Resolve data/ relative to this script's location, not the working directory
+_HERE = os.path.dirname(os.path.abspath(__file__)) # src/components/
+_PROJECT_ROOT = os.path.join(_HERE, '..', '..') # project root
+_DEFAULT_DATA_DIR = os.path.join(_PROJECT_ROOT, 'data') # project root/data/
 
 if __name__ == "__main__":
     DataIngestion(
         bq_project="chess-497919",
         bq_dataset="lichess_raw",
-        output_dir="data",
+        output_dir=_DEFAULT_DATA_DIR,
     ).run_user_games(
         username="stevenhan",
         perf_type="rapid+classical",
