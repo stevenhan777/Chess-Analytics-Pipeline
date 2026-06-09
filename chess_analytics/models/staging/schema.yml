@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_lichess__games
+    description: "One cleaned row per Lichess game."
+    columns:
+      - name: game_id
+        data_tests: [unique, not_null]
+      - name: result
+        data_tests:
+          - accepted_values:
+              values: ['white', 'black', 'draw']
+      - name: perf_type
+        data_tests:
+          - accepted_values:
+              values: ['blitz', 'rapid', 'classical', 'bullet', 'correspondence']
+
+  - name: stg_lichess__moves
+    description: "One row per half-move (ply) in every analysed game."
+    columns:
+      - name: judgment
+        data_tests:
+          - accepted_values:
+              values: ['Blunder', 'Mistake', 'Inaccuracy', null]
+              quote: true

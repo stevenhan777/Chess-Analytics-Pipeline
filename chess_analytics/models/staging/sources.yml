@@ -11,20 +11,20 @@ sources:
         description: "One row per Lichess game. Scalar metadata only."
         columns:
           - name: game_id
-            tests: [unique, not_null]
+            data_tests: [unique, not_null]
 
       - name: moves
         description: "One row per ply. Move SAN and player identity."
         columns:
           - name: game_id
-            tests: [not_null]
+            data_tests: [not_null]
           - name: move_offset
-            tests: [not_null]
+            data_tests: [not_null]
 
       - name: move_evals
         description: "One row per ply. Engine eval and clock data."
         columns:
           - name: game_id
-            tests: [not_null]
+            data_tests: [not_null]
           - name: move_offset
-            tests: [not_null]
+            data_tests: [not_null]
