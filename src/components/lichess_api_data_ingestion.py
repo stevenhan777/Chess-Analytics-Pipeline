@@ -268,7 +268,7 @@ class DataIngestion:
             table_id,
             job_config=bigquery.LoadJobConfig(
                 schema=schema,
-                write_disposition="WRITE_APPEND",
+                write_disposition="WRITE_TRUNCATE",
             ),
         )
         job.result()
