@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: int_move_sequences
+    description: >
+      stg_lichess__moves enriched with piece-type classification,
+      move annotation flags, and rolling eval metrics.
+    columns:
+      - name: piece_type
+        tests:
+          - accepted_values:
+              values: ['pawn','knight','bishop','rook','queen','king']
+
+  - name: int_rating_trajectories
+    description: >
+      One row per player per game. Adds LAG/LEAD rating windows
+      and rolling win-rate / accuracy over the last 10 games.
+
+  - name: int_opening_patterns
+    description: >
+      One row per game. Reconstructs the opening move sequence string
+      from the first opening_ply half-moves.
