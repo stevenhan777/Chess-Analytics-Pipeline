@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fct_matches
+    description: "Fact table: one row per game, all metrics pre-computed."
+    columns:
+      - name: game_id
+        tests: [unique, not_null]
+      - name: result
+        tests:
+          - accepted_values:
+              values: ['white', 'black', 'draw']
+      - name: white_blunders
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+
+  - name: dim_players
+    description: "Player dimension: lifetime stats and color preference."
+    columns:
+      - name: username
+        tests: [unique, not_null]
+      - name: win_rate
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+
+  - name: dim_openings
+    description: "One row per ECO opening code. Includes win rates and canonical move sequence."
+    columns:
+      - name: opening_eco
+        tests: [not_null]
