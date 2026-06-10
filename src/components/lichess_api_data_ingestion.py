@@ -73,11 +73,18 @@ class DataIngestion:
         bq_project: str,
         bq_dataset: str = "lichess_raw",
         output_dir: str = "data",
+        keyfile_path: str = r"C:\Users\steve\.dbt\chess-pipeline-key.json",
     ):
         self.bq_project = bq_project
         self.bq_dataset = bq_dataset
         self.output_dir = output_dir
         self.bq_client = bigquery.Client(project=bq_project)
+        
+        # Set service account key before initialising the BQ client
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = keyfile_path
+
+        self.bq_client = bigquery.Client(project=bq_project)
+
         os.makedirs(output_dir, exist_ok=True)
 
     # ── Public entry points ─────────────────────────────────────────────────
@@ -308,6 +315,7 @@ if __name__ == "__main__":
         bq_project="chess-497919",
         bq_dataset="lichess_raw",
         output_dir=_DEFAULT_DATA_DIR,
+        keyfile_path=r"C:\Users\steve\.dbt\chess-pipeline-key.json",
     ).run_user_games(
         username="stevenhan",
         perf_type="rapid+classical",
