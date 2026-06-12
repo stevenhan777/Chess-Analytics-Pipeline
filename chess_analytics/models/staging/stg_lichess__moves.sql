@@ -46,5 +46,5 @@ select
 
 from moves m
 left join evals e
-    on  m.game_id     = e.game_id
+    on  m.game_id = e.game_id
     and m.move_offset = e.move_offset
