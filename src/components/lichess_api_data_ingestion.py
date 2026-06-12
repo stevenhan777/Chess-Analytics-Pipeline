@@ -73,7 +73,7 @@ class DataIngestion:
         bq_project: str,
         bq_dataset: str = "lichess_raw",
         output_dir: str = "data",
-        keyfile_path: str = r"C:\Users\steve\.dbt\chess-pipeline-key.json",
+        keyfile_path: str = "/opt/airflow/config/chess-pipeline-key.json",
     ):
         self.bq_project = bq_project
         self.bq_dataset = bq_dataset
